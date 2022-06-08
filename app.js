@@ -30,7 +30,7 @@ app.use('/css',express.static(__dirname + "/node_modules/bootstrap/dist/css"));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/languages', languagesRouter);
-app.use('/users/json_list', jlistRouter);
+app.use('/users/json_list', json_listRouter);
 
 
 app.get("/test",(request,response)=>{
