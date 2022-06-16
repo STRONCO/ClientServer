@@ -19,6 +19,61 @@ async function getMultiple(page = 1){
 
 }
 
+async function create(language){
+     console.log(`INSERT INTO languages
+     (name, description, year)
+     VALUES
+     ('${language.name}', '${language.description}', ${language.year})
+     `);
+
+    const result = await db.query(
+        `INSERT INTO languages (name, description, year) VALUES
+        ('${language.name}', '${language.description}', ${language.year})`
+    );
+
+    let message = "Error in creating programming language";
+    if (result.affectedRows){
+        message = "A new language has been added!";
+    }
+
+    return {message}
+}
+
+async function update(id,language){
+   const result = await db.query(
+       `UPDATE languages 
+       SET 
+       name = '${language.name}', 
+       description = '${language.description}', 
+       year = ${language.year}
+       WHERE id= ${id}
+       `
+   );
+
+   let message = "Error in update a programming language";
+   if (result.affectedRows){
+       message = "A language has been updated!";
+   }
+
+   return {message}
+}
+
+async function remove(id){
+    const result = await db.query(
+        `DELETE FROM languages WHERE id= ${id}`
+    );
+ 
+    let message = "Error in delete a programming language";
+    if (result.affectedRows){
+        message = "A language has been deleted!";
+    }
+ 
+    return {message}
+ }
+
 module.exports = {
-    getMultiple
+    getMultiple,
+    create,
+    update,
+    remove
 }
